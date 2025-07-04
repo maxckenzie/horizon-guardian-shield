@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Shield, Camera, Bell, Zap, Phone, Mail, MapPin, CheckCircle } from 'lucide-react';
+import { Shield, Camera, Bell, Zap, Phone, Mail, MapPin, CheckCircle, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -39,6 +38,40 @@ const Index = () => {
     { number: "99.9%", label: "Uptime Garantido" }
   ];
 
+  const downloads = [
+    {
+      title: "Catálogo de Produtos",
+      description: "Catálogo completo com todos os nossos produtos e especificações técnicas.",
+      fileSize: "2.5 MB",
+      fileType: "PDF"
+    },
+    {
+      title: "Manual de Instalação",
+      description: "Guia detalhado para instalação de sistemas de segurança.",
+      fileSize: "1.8 MB",
+      fileType: "PDF"
+    },
+    {
+      title: "Formulário de Orçamento",
+      description: "Formulário para solicitação de orçamento personalizado.",
+      fileSize: "450 KB",
+      fileType: "PDF"
+    },
+    {
+      title: "Especificações Técnicas",
+      description: "Documentação técnica completa dos equipamentos.",
+      fileSize: "3.2 MB",
+      fileType: "PDF"
+    }
+  ];
+
+  const handleDownload = (fileName: string) => {
+    // Simula o download do arquivo
+    console.log(`Downloading ${fileName}...`);
+    // Em uma implementação real, aqui seria feito o download do arquivo
+    alert(`Download iniciado: ${fileName}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
       {/* Header */}
@@ -56,6 +89,9 @@ const Index = () => {
             <nav className="hidden md:flex space-x-8">
               <a href="#services" className="text-gray-300 hover:text-cyan-400 transition-colors">
                 Serviços
+              </a>
+              <a href="#downloads" className="text-gray-300 hover:text-cyan-400 transition-colors">
+                Downloads
               </a>
               <a href="#about" className="text-gray-300 hover:text-cyan-400 transition-colors">
                 Sobre
@@ -148,6 +184,53 @@ const Index = () => {
                     ))}
                   </ul>
                 </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Downloads Section */}
+      <section id="downloads" className="py-20 px-6">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h3 className="text-4xl font-bold text-white mb-4">
+              Downloads
+            </h3>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Baixe nossos materiais informativos, catálogos e documentação técnica
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {downloads.map((download, index) => (
+              <Card key={index} className="bg-slate-800/60 border-slate-700 hover:border-cyan-400/50 transition-all duration-300">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <CardTitle className="text-white text-lg mb-2">
+                        {download.title}
+                      </CardTitle>
+                      <CardDescription className="text-gray-300 mb-4">
+                        {download.description}
+                      </CardDescription>
+                      <div className="flex items-center space-x-4 text-sm text-gray-400">
+                        <span className="bg-cyan-400/20 text-cyan-400 px-2 py-1 rounded">
+                          {download.fileType}
+                        </span>
+                        <span>{download.fileSize}</span>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => handleDownload(download.title)}
+                      size="sm"
+                      className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white ml-4"
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Download
+                    </Button>
+                  </div>
+                </CardHeader>
               </Card>
             ))}
           </div>
